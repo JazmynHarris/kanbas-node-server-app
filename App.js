@@ -30,11 +30,23 @@ import cors from "cors";
 
 // Initialize Express app
 const app = express();
-
+const allowedOrigins = ["http://localhost:3000", "https://classy-brioche-97316a.netlify.app"];
 // Configure CORS
+// app.use(cors({
+//     origin: "http://localhost:3000", // Frontend URL
+//     credentials: true // Allow credentials (cookies, authorization headers, etc.)
+// }));
+
 app.use(cors({
-    origin: "http://localhost:3000", // Frontend URL
-    credentials: true // Allow credentials (cookies, authorization headers, etc.)
+    credentials: true,
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        } else {
+            const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+            return callback(new Error(msg), false);
+        }
+    }
 }));
 
 // Middleware to parse JSON bodies
