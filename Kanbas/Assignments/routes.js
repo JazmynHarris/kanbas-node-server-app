@@ -3,6 +3,7 @@ import * as db from "../Database/index.js";
 export default function AssignmentRoutes(app) {
     app.delete("/api/assignments/:aid", (req, res) => {
         const { aid } = req.params;
+        console.log("aid: " + aid);
         const assignmentIndex = assignmentList.findIndex((a) => a._id === aid);
 
         if (assignmentIndex === - 1) {

@@ -1,25 +1,4 @@
-// import "dotenv/config";
-// import express from 'express';
-// import Hello from "./Hello.js";
-// import Lab5 from "./Lab5/index.js";
-// import CourseRoutes from './Kanbas/Courses/routes.js';
-// import ModuleRoutes from './Kanbas/Modules/routes.js';
-// import cors from "cors";
-// import mongoose from "mongoose";
-// import UserRoutes from "./Users/routes.js";
-// import AssignmentRoutes from './Kanbas/Assignments/routes.js';
-// const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:127017/kanbas";
-// mongoose.connect(CONNECTION_STRING);
-// const app = express();
-// app.use(cors());
-// app.use(express.json());
-// UserRoutes(app);
-// AssignmentRoutes(app);
-// ModuleRoutes(app);
-// CourseRoutes(app);
-// Lab5(app);
-// Hello(app);
-// app.listen(process.env.PORT || 4000);
+import "dotenv/config";
 import express from 'express';
 import Hello from "./Hello.js";
 import Lab5 from "./Lab5/index.js";
@@ -27,15 +6,14 @@ import CourseRoutes from './Kanbas/Courses/routes.js';
 import ModuleRoutes from './Kanbas/Modules/routes.js';
 import AssignmentRoutes from './Kanbas/Assignments/routes.js';
 import cors from "cors";
+import mongoose from "mongoose";
+import UserRoutes from './Users/routes.js';
 
 // Initialize Express app
 const app = express();
 const allowedOrigins = ["http://localhost:3000", "https://classy-brioche-97316a.netlify.app"];
-// Configure CORS
-// app.use(cors({
-//     origin: "http://localhost:3000", // Frontend URL
-//     credentials: true // Allow credentials (cookies, authorization headers, etc.)
-// }));
+const CONNNECTION_STRING = process.env.MONGO_CONNECTION_STRING || "mongodb://127.0.0.1:27017/kanbas";
+mongoose.connect(CONNNECTION_STRING);
 
 app.use(cors({
     credentials: true,
@@ -49,10 +27,13 @@ app.use(cors({
     }
 }));
 
+// app.use(cors());
+
 // Middleware to parse JSON bodies
 app.use(express.json());
 
 // Register routes
+UserRoutes(app);
 AssignmentRoutes(app);
 ModuleRoutes(app);
 CourseRoutes(app);
