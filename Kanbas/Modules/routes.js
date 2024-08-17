@@ -27,6 +27,7 @@ export default function ModuleRoutes(app) {
     });
 
     app.get("/api/courses/:cid/modules", (req, res) => {
+        console.log("calling al the msonters");
         const { cid } = req.params;
         const modules = db.modules.filter((m) => m.course === cid);
         res.json(modules);

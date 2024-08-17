@@ -36,6 +36,7 @@ export default function CourseRoutes(app) {
     });
 
     app.get("/api/courses", (req, res) => {
+        console.log("incorrect");
         res.json(courses);
     });
 }
